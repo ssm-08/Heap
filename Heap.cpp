@@ -36,5 +36,5 @@ int main() {
     } else if (strcmp(input, QUIT) == 0) {
       run = false;
     }
-
+  }
 }

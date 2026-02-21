@@ -3,14 +3,17 @@
 
 using namespace std;
 
-int add(int n, int h[100]);
+void add(int n, int& size, int h[100]);
+void sort(int index, int h[100]);
+
 int remove(int h[100]);
-int print(int h[100]);
+void print(int h[100]);
 
 int main() {
 
   int heap[100] = {};
-
+  int size = 0;
+  
   bool run = true;
   
   char input[99] = "";
@@ -38,3 +41,32 @@ int main() {
     }
   }
 }
+
+void add(int n, int& size, int h[100]) {
+
+  // Add at the last slot
+  h[size] = n;
+  int index = size;
+  size++;
+
+  // Sort
+  sort(index, h);
+}
+
+void sort(int index, int h[100]) {
+
+  // Check if not at root
+  if (index != 0) {
+    int p = (index-1)/2;
+
+    // Swap with parent when bigger
+    if (h[p] < h[index]) {
+      swap(h[p], h[index]);
+      sort(p, h);
+    }
+  }
+}
+
+
+  
+  

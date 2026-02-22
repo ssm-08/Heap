@@ -9,7 +9,7 @@ void sortUp(int index, int h[100]);
 void remove(int& size, int h[100]);
 void sortDown(int index, int h[100]);
 
-void print(int h[100]);
+void print(int index, int level, int h[100]);
 
 int main() {
 
@@ -98,32 +98,28 @@ void sortDown(int index, int h[100]) {
   }
 }
 
-void print(int index, int level, int* depth, int h[100]) {
+void print(int index, int level, int h[100]) {
 
   int left = 2*index + 1;
   int right = 2*index + 2;
 
   // Start from top
   if (h[right] != 0) {
-    print(right, level++, depth, h);
+    print(right, level++, h);
   }
 
   // Print current
-  for (int i = 0; i < *depth; i++) {
-    cout << "\n";
-  }
+  cout << "\n";
 
   for (int i = 0; i < level; i++) {
     cout << " ";
   }
 
   cout << h[index];
-
-  (*depth)++;
   
   // End with bottom
   if (h[left] != 0) {
-    print(left, level++, depth, h);
+    print(left, level++, h);
   }
   
 }

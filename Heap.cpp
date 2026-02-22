@@ -97,3 +97,33 @@ void sortDown(int index, int h[100]) {
     sortDown(right, h);
   }
 }
+
+void print(int index, int level, int* depth, int h[100]) {
+
+  int left = 2*index + 1;
+  int right = 2*index + 2;
+
+  // Start from top
+  if (h[right] != 0) {
+    print(right, level++, depth, h);
+  }
+
+  // Print current
+  for (int i = 0; i < *depth; i++) {
+    cout << "\n";
+  }
+
+  for (int i = 0; i < level; i++) {
+    cout << " ";
+  }
+
+  cout << h[index];
+
+  (*depth)++;
+  
+  // End with bottom
+  if (h[left] != 0) {
+    print(left, level++, depth, h);
+  }
+  
+}

@@ -105,6 +105,21 @@ void sortDown(int index, int h[100]) {
   int left = 2*index + 1;
   int right = 2*index + 2;
 
+  if (h[left] > h[right]) {
+    if (h[left] > h[index]) { // Check left child
+      swap(h[left], h[index]);
+      cout << "left";
+      sortDown(left, h);
+    }
+  } else {
+    if (h[right] > h[index]) { // Check right child;
+      swap(h[right], h[index]);
+      cout << "right";
+      sortDown(right, h);
+    }
+  }
+
+  /*
   if (h[left] > h[index]) { // Check left child
     swap(h[left], h[index]);
     cout << "left";
@@ -114,6 +129,7 @@ void sortDown(int index, int h[100]) {
     cout << "right";
     sortDown(right, h);
   }
+  */
 }
 
 void print(int index, int level, int h[100]) {

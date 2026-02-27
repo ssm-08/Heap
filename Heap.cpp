@@ -10,13 +10,13 @@ void add(int n, int& size, int h[100]);
 void sortUp(int index, int h[100]);
 
 void remove(int& size, int h[100]);
-void sortDown(int index, int h[100]);
+void sortDown(int index, int size, int h[100]);
 
-void print(int index, int level, int h[100]);
+void print(int index, int level, int size, int h[100]);
 
 int main() {
 
-  // Create program varibales
+  // Create program variables
   int heap[100] = {};
   int size = 0;
   
@@ -78,7 +78,7 @@ int main() {
 	
 
     } else if (strcmp(input, PRINT) == 0) { // Print heap
-      print(0, 0, heap);
+      print(0, 0, size, heap);
     } else if (strcmp(input, REM) == 0) { // Remove root
       remove(size, heap);
     } else if (strcmp(input, ERA) == 0) { // Erase heap
@@ -128,37 +128,38 @@ void remove(int& size, int h[100]) {
   size--;
 
   // Sort
-  sortDown(index, h);
+  sortDown(index, size, h);
   
 }
 
-void sortDown(int index, int h[100]) {
+void sortDown(int index, int size, int h[100]) {
 
   int left = 2*index + 1;
   int right = 2*index + 2;
+  int largest;
 
-  // Check for bigger parent
-  if (h[left] > h[right]) {
-    if (h[left] > h[index]) { // Check left child
-      swap(h[left], h[index]);
-      sortDown(left, h);
+  if (left < size && right < size) { // Check bounds
+    largest = left;
+
+    if (h[right] > h[left]) { // Check largest
+      largest = right;
     }
-  } else {
-    if (h[right] > h[index]) { // Check right child;
-      swap(h[right], h[index]);
-      sortDown(right, h);
+
+    if (h[largest] > h[index]) { // Check child and sort
+      swap(h[largest], h[index]);
+      sortDown(largest, size, h);
     }
   }
 }
 
-void print(int index, int level, int h[100]) {
+void print(int index, int level, int size, int h[100]) {
 
   int left = 2*index + 1;
   int right = 2*index + 2;
 
   // Start from top
-  if ((h[right] != 0) && (right < 100)) {
-    print(right, level + 1, h);
+  if (h[right] != 0 && right < size) {
+    print(right, level + 1, size, h);
   }
 
   // Print current
@@ -171,8 +172,8 @@ void print(int index, int level, int h[100]) {
   cout << h[index];
   
   // End with bottom
-  if ((h[left] != 0) && (left < 100)){
-    print(left, level + 1, h);
+  if (h[left] != 0 && left < size){
+    print(left, level + 1, size, h);
   }
   
 }

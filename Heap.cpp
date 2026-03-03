@@ -138,10 +138,10 @@ void sortDown(int index, int size, int h[100]) {
   int right = 2*index + 2;
   int largest;
 
-  if (left < size && right < size) { // Check bounds
+  if (left < size) { // Check bounds
     largest = left;
 
-    if (h[right] > h[left]) { // Check largest
+    if (h[right] > h[left] && right < size) { // Check largest
       largest = right;
     }
 
